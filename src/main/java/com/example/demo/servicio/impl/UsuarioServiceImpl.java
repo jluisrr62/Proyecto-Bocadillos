@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.example.demo.modelo.Rol;
 import com.example.demo.modelo.Usuario;
 import com.example.demo.modelo.dto.UsuarioDTO;
+import com.example.demo.persistencia.RolRepo;
 import com.example.demo.persistencia.UsuarioRepo;
 import com.example.demo.servicio.interfaces.UsuarioService;
 
@@ -20,6 +21,8 @@ public class UsuarioServiceImpl implements UsuarioService{
 
 	@Autowired
 	private UsuarioRepo usuarioRepo;
+	@Autowired
+	private RolRepo rolRepo;
 	
 	private BCryptPasswordEncoder passEncoder = new BCryptPasswordEncoder();
 	
@@ -52,7 +55,7 @@ public class UsuarioServiceImpl implements UsuarioService{
 				passEncoder.encode(userDTO.getPassword())
 				);
 		
-		nuevoUsuario.getRoles().add(new Rol("ROL_ADMIN"));
+		nuevoUsuario.getRoles().add(rolRepo.findByNombre("ROL_ADMIN"));
 		
 		return usuarioRepo.save(nuevoUsuario);
 	}

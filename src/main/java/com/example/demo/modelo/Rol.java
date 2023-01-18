@@ -16,7 +16,7 @@ import javax.persistence.Table;
 
 
 @Entity
-@Table(name = "usuarios")
+@Table(name = "roles")
 public class Rol {
 
 	@Id
@@ -27,9 +27,6 @@ public class Rol {
 	@Column(name = "nombre")
 	private String nombre;
 
-	@Column (name="username")
-	private String username;
-	
 	@ManyToMany(mappedBy = "roles", fetch = FetchType.EAGER)
 	private Set<Usuario> usuarios;
 	
@@ -56,16 +53,6 @@ public class Rol {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
-	}
-	
-	
-
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
 	}
 
 	public Set<Usuario> getUsuarios() {
