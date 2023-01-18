@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<head  th:insert="librerias::librerias">
+</head>
+<body>
+<div class="container">
+	<header>
+		<div th:insert="top::top">	</div>
+	</header>
+		<h1>Ingredientes</h1>
+		
+		<table class="table table-hover">
+			<thead class="table-dark bg-info text-white">
+				<tr>
+					<th>Id</th>
+					<th>Nombre</th>
+					<th>Vegano</th>
+					<th>Editar</th>
+					<th>Borrar</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:if="${listaIngredientes.empty}">
+					<td colspan="2"> No hay ingredientes </td>
+				</tr>
+				<tr th:each="ingrediente:${listaIngredientes}">
+					<td>
+						<a th:href="@{/ingredientes/{id}(id=${ingrediente.id})}" class="btn btn-primary btn-sm">
+							<span th:text="${ingrediente.id}"></span>
+						</a> 
+					</td>
+					<td>
+						<span th:text="${ingrediente.nombre}"></span>
+					</td>
+					<td>
+						<span th:text="${ingrediente.vegano}"></span>
+					</td>
+					<td>
+						<a th:attr="data-target='#modal-edit'+${ingrediente.id}" data-toggle="modal" data-target="#modal-edit" class="btn btn-primary btn-sm text-white pointer">Edit</a>
+					</td>
+					<td>
+						<a th:attr="data-target='#modal-delete'+${ingrediente.id}" data-toggle="modal" data-target="#modal-delete" class="btn btn-primary btn-sm text-white pointer">Borrar</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+</div>
+</body>

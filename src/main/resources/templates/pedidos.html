@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<head  th:insert="librerias::librerias"> </head>
+
+<body>
+	<div class="container">
+		<header>
+			<div th:insert="top::top">	</div>
+		</header>
+		<h1>Pedidos</h1>
+		
+		<!-- Imprimir tabla pedidos -->
+		
+		<table class="table table-hover">
+			<thead class="table-dark bg-info text-white">
+				<tr>
+					<th>Id</th>
+					<th>Nombre Alumno</th>
+					<th>Bocadillos</th>
+					<th>Precio</th>
+					<th>Editar</th>
+					<th>Borrar</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:if="${listaPedidos.empty}">
+					<td colspan="2"> No hay pedidos </td>
+				</tr>
+				<tr th:each="pedido:${listaPedidos}">
+					<td>
+						<a th:href="@{/pedidos/{id}(id=${pedido.id})}" class="btn btn-primary btn-sm">
+							<span th:text="${pedido.id}"> </span>
+						</a> 
+					</td>
+					<td>
+						<span th:text="${pedido.alumno.getNombre()}"> </span>
+					</td>
+					<td>
+						<span th:each="bocadillo:${pedido.bocadillos}"> 
+							<span th:text="${bocadillo.nombre}">Nombre del bocadillo</span>
+							<span>,</span>
+						</span>
+					</td>
+					<td>
+						<span th:text="${pedido.precio}">precio</span>
+					</td>
+					<td>
+						<a th:attr="data-target='#modal-edit'+${pedido.id}" data-toggle="modal" data-target="#modal-edit" class="btn btn-primary btn-sm text-white pointer">Edit</a>
+					</td>
+					<td>
+						<a th:attr="data-target='#modal-delete'+${pedido.id}" data-toggle="modal" data-target="#modal-delete" class="btn btn-primary btn-sm text-white pointer">Borrar</a>
+					</td>
+					
+					<!-- Borrar modal -->
+		
+					<div class="modal fade" th:id="modal-delete+${pedido.id}">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h4 class="modal-title" id="exampleModalLabel">Eliminar</h4>
+									<button class="close" type="button" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true">x</span>
+									</button>
+								</div>
+								<div class="modal-body">
+									<p class="error-text"> ¿Esta seguro de eliminar al pedido:
+										<strong><span th:text="${pedido.id}"></span></strong>?
+									</p>
+								</div>		
+								<div class="modal-footer">
+									<button class="btn btn-secondary btn-sm" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+									<a th:href="@{/pedidos/delete/{id}(id=${pedido.id})}">
+										<span class="btn btn-danger btn-sm" value="delete">Eliminar</span>
+									</a>		
+								</div>
+							</div>
+						</div>
+					</div>					
+			
+					<!-- Editar modal -->
+					
+					<div class="modal fade" th:id="modal-edit+${pedido.id}">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h4 class="modal-title" id="exampleModalLabel">Editar Pedido</h4>
+									<button class="close" type="button" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true">x</span>
+									</button>
+								</div>
+								<div class="modal-body">
+									<p class="error-text"> editar pedido existente: </p>	
+		
+								<!-- formulario nombre a editar -->
+			
+								<form action="#" th:action="@{/pedidos/add}" th:object="${pedidoNuevo}" method="post">
+									<div class="form-row">
+										<div class="form-group mt-4">
+											<label for="texto">Seleccionar Alumno:</label>
+											<select th:field="*{alumno.id}" class="form-control" id="exampleFormControlSelect1">
+												<option th:each="alumno:${listaAlumnos}" th:value="${alumno.id}" th:text="${alumno.nombre}" value="">seleccionar alumno</option>
+											</select>
+										</div>
+									</div>
+									
+									<div class="form-row">
+										<div class="form-group mt-4">
+											<label for="texto">Seleccionar Bocadillos:</label>
+											<select th:field="*{bocadillos}" multiple="true" class="form-control selectpicken" name="bocadillos" id="bocadillos">
+												<option th:each="b:${listaBocadillos}" th:value="${b.id}" th:text="${b.nombre}" value="">seleccionar bocadilloss</option>
+											</select>
+										</div>
+									</div>
+								
+								</div>
+								<div class="modal-footer">
+									<button class="btn btn-secondary btn-sm" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+									<input type="submit" value="Crear" class="btn btn-primary float-right">
+								</div></form>
+							</div>
+					</div>					
+				</div>
+				
+					
+				</tr>
+			</tbody>
+		</table>
+		
+		<div class="col-2 float-right">
+			<div class="p-5">
+				<button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#crearMensaje">
+					+
+				</button>
+			</div>
+		</div>
+		
+		<!-- create modal-->
+ 
+		<div class="modal fade" id="crearMensaje">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title" id="exampleModalLabel">Crear Pedido</h4>
+							<button class="close" type="button" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">x</span>
+							</button>
+					</div>
+					<div class="modal-body">
+						<p class="error-text"> Crear pedido nuevo: </p>	
+		
+					<!-- formulario nombre a editar -->
+	
+						<form action="#" th:action="@{/pedidos/add}" th:object="${pedidoNuevo}" method="post">
+							<div class="form-row">
+								<div class="form-group mt-4">
+									<label for="texto">Seleccionar Alumno:</label>
+									<select th:field="*{alumno.id}" class="form-control" id="exampleFormControlSelect1">
+										<option th:each="alumno:${listaAlumnos}" th:value="${alumno.id}" th:text="${alumno.nombre}" value="">seleccionar alumno</option>
+									</select>
+								</div>
+							</div>
+							
+							<div class="form-row">
+								<div class="form-group mt-4">
+									<label for="texto">Seleccionar Bocadillos:</label>
+									<select th:field="*{bocadillos}" multiple="true" class="form-control selectpicken" name="bocadillos" id="bocadillos">
+										<option th:each="b:${listaBocadillos}" th:value="${b.id}" th:text="${b.nombre}" value="">seleccionar bocadilloss</option>
+									</select>
+								</div>
+							</div>
+						
+					</div>
+					<div class="modal-footer">
+						<button class="btn btn-secondary btn-sm" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+						<input type="submit" value="Crear" class="btn btn-primary float-right">
+					</div></form>
+				</div>
+			</div>					
+		</div>
+		
+
+		
+		
+		
+		
+	</div>
+</body>
