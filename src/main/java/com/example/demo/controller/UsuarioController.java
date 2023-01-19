@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.demo.modelo.Alumno;
+import com.example.demo.modelo.Rol;
 import com.example.demo.modelo.Usuario;
 import com.example.demo.modelo.dto.UsuarioDTO;
 import com.example.demo.servicio.impl.UsuarioServiceImpl;
@@ -54,10 +57,12 @@ public class UsuarioController {
 	//controlador para eliminar un usuario
 	@GetMapping("/delete/{id}")
 	public String eliminarUsuario(Model model, @PathVariable Integer id) {
+		if(elUsuarioLogueadoEsAdmin()) {
+			userDetailsService.eliminarUsuarioPorId(id);
+		}
 		
-		userDetailsService.eliminarUsuarioPorId(id);
 		
-		return "redirect:/usuarios";
+		return "redirect:/";
 	}
 	
 	//controlador para añadir un usuario
@@ -88,4 +93,23 @@ public class UsuarioController {
 		
 	}
 	
+	private boolean elUsuarioLogueadoEsAdmin() {
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		UserDetails userDetails = null;
+		
+		if(principal instanceof UserDetails) {
+			
+			userDetails = (UserDetails) principal;
+			
+			Usuario u = userDetailsService.obtenerUsuarioPorNombre(userDetails.getUsername());
+			
+			for(Rol r : u.getRoles()) {
+				if(r.getNombre().compareTo("ROL_ADMIN")==0) {
+					return true;
+				}
+			}
+		}
+				
+		return false;
+	}
 }
