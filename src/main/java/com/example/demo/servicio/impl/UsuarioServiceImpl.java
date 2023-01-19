@@ -55,7 +55,7 @@ public class UsuarioServiceImpl implements UsuarioService{
 				passEncoder.encode(userDTO.getPassword())
 				);
 		
-		nuevoUsuario.getRoles().add(rolRepo.findByNombre("ROL_ADMIN"));
+		nuevoUsuario.getRoles().add(rolRepo.findByNombre("ROLE_ADMIN"));
 		
 		return usuarioRepo.save(nuevoUsuario);
 	}
