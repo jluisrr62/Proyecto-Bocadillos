@@ -2147,3 +2147,58 @@ org.thymeleaf.exceptions.TemplateInputException: Error resolving template [usuar
 2023-01-19 09:13:48.328  INFO 15680 --- [RMI TCP Connection(8)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
 2023-01-19 09:13:48.329  INFO 15680 --- [RMI TCP Connection(8)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
 2023-01-19 09:13:48.334  INFO 15680 --- [RMI TCP Connection(8)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2023-01-30 10:01:21.831  INFO 5224 --- [main] com.example.demo.SpringJpaApplication    : Starting SpringJpaApplication using Java 17.0.4.1 on DESKTOP-3ACINV9 with PID 5224 (C:\Users\Jose\Documents\workspace-spring-tool-suite-4-4.16.1.RELEASE\ProyectoBocadillos\Proyecto-bocadillos\target\classes started by Jose in C:\Users\Jose\Documents\workspace-spring-tool-suite-4-4.16.1.RELEASE\ProyectoBocadillos\Proyecto-bocadillos)
+2023-01-30 10:01:21.834  INFO 5224 --- [main] com.example.demo.SpringJpaApplication    : No active profile set, falling back to 1 default profile: "default"
+2023-01-30 10:01:22.424  INFO 5224 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-01-30 10:01:22.497  INFO 5224 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 63 ms. Found 6 JPA repository interfaces.
+2023-01-30 10:01:22.989  INFO 5224 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2023-01-30 10:01:23.000  INFO 5224 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-01-30 10:01:23.000  INFO 5224 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.65]
+2023-01-30 10:01:23.109  INFO 5224 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-01-30 10:01:23.109  INFO 5224 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1235 ms
+2023-01-30 10:01:23.267  INFO 5224 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-01-30 10:01:23.421  INFO 5224 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-01-30 10:01:23.500  INFO 5224 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-01-30 10:01:23.564  INFO 5224 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.6.10.Final
+2023-01-30 10:01:23.745  INFO 5224 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2023-01-30 10:01:23.878  INFO 5224 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL55Dialect
+2023-01-30 10:01:24.480  INFO 5224 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-01-30 10:01:24.489  INFO 5224 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-01-30 10:01:24.887  WARN 5224 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-01-30 10:01:24.993  WARN 5224 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/ignore1']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-01-30 10:01:24.994  INFO 5224 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/ignore1']
+2023-01-30 10:01:24.994  WARN 5224 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/ignore2']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-01-30 10:01:24.994  INFO 5224 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/ignore2']
+2023-01-30 10:01:25.043  INFO 5224 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@5b5a89d1, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@267b678f, org.springframework.security.web.context.SecurityContextPersistenceFilter@2a9ea03f, org.springframework.security.web.header.HeaderWriterFilter@31f5ffb9, org.springframework.security.web.authentication.logout.LogoutFilter@37f627d0, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@67baa05, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@2ba0b95f, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@5216532a, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@4803bf73, org.springframework.security.web.session.SessionManagementFilter@3a9040f0, org.springframework.security.web.access.ExceptionTranslationFilter@3f838072, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@4c0ab04f]
+2023-01-30 10:01:25.187  INFO 5224 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2023-01-30 10:01:25.406  INFO 5224 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2023-01-30 10:01:25.415  INFO 5224 --- [main] com.example.demo.SpringJpaApplication    : Started SpringJpaApplication in 3.932 seconds (JVM running for 4.62)
+2023-01-30 10:01:38.101  INFO 5224 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-01-30 10:01:38.101  INFO 5224 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-01-30 10:01:38.102  INFO 5224 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 0 ms
+2023-01-30 10:01:41.131  WARN 5224 --- [http-nio-8080-exec-4] o.h.jpa.boot.spi.ProviderChecker         : HHH015016: Encountered a deprecated javax.persistence.spi.PersistenceProvider [org.hibernate.ejb.HibernatePersistence]; [org.hibernate.jpa.HibernatePersistenceProvider] will be used instead.
+2023-01-30 10:01:41.132  INFO 5224 --- [http-nio-8080-exec-4] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: JL]
+2023-01-30 10:01:41.191  WARN 5224 --- [http-nio-8080-exec-4] org.hibernate.orm.connections.pooling    : HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2023-01-30 10:01:41.191  INFO 5224 --- [http-nio-8080-exec-4] org.hibernate.orm.connections.pooling    : HHH10001005: using driver [com.mysql.cj.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/spring]
+2023-01-30 10:01:41.191  INFO 5224 --- [http-nio-8080-exec-4] org.hibernate.orm.connections.pooling    : HHH10001001: Connection properties: {password=****, user=root}
+2023-01-30 10:01:41.191  INFO 5224 --- [http-nio-8080-exec-4] org.hibernate.orm.connections.pooling    : HHH10001003: Autocommit mode: false
+2023-01-30 10:01:41.194  INFO 5224 --- [http-nio-8080-exec-4] .c.i.DriverManagerConnectionProviderImpl : HHH000115: Hibernate connection pool size: 20 (min=1)
+2023-01-30 10:01:41.198  INFO 5224 --- [http-nio-8080-exec-4] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+2023-01-30 10:01:41.275  INFO 5224 --- [http-nio-8080-exec-4] org.hibernate.orm.connections.access     : HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@27082f82] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2023-01-30 10:01:41.576  INFO 5224 --- [http-nio-8080-exec-4] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-01-30 10:02:12.155  INFO 5224 --- [RMI TCP Connection(4)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2023-01-30 10:02:12.169  INFO 5224 --- [RMI TCP Connection(4)-127.0.0.1] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2023-01-30 10:02:12.170  INFO 5224 --- [RMI TCP Connection(4)-127.0.0.1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Destroying Spring FrameworkServlet 'dispatcherServlet'
+2023-01-30 10:02:12.173  WARN 5224 --- [RMI TCP Connection(4)-127.0.0.1] o.a.c.loader.WebappClassLoaderBase       : The web application [ROOT] appears to have started a thread named [Hibernate Connection Pool Validation Thread] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base@17.0.4.1/jdk.internal.misc.Unsafe.park(Native Method)
+ java.base@17.0.4.1/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:252)
+ java.base@17.0.4.1/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:1672)
+ java.base@17.0.4.1/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:1182)
+ java.base@17.0.4.1/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:899)
+ java.base@17.0.4.1/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1062)
+ java.base@17.0.4.1/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1122)
+ java.base@17.0.4.1/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+ java.base@17.0.4.1/java.lang.Thread.run(Thread.java:833)
+2023-01-30 10:02:12.179  INFO 5224 --- [RMI TCP Connection(4)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-01-30 10:02:12.180  INFO 5224 --- [RMI TCP Connection(4)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2023-01-30 10:02:12.186  INFO 5224 --- [RMI TCP Connection(4)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
