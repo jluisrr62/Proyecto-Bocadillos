@@ -3,11 +3,12 @@ package com.example.demo.servicio.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.example.demo.modelo.Pedido;
 import com.example.demo.persistencia.PedidoRepository;
 import com.example.demo.servicio.interfaces.PedidoService;
-
+@Service
 public class PedidoServiceImpl implements PedidoService{
 
 	@Autowired

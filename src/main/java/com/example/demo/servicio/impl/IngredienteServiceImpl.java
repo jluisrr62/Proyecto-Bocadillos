@@ -3,11 +3,12 @@ package com.example.demo.servicio.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.example.demo.modelo.Ingrediente;
 import com.example.demo.persistencia.IngredienteRepository;
 import com.example.demo.servicio.interfaces.IngredienteService;
-
+@Service
 public class IngredienteServiceImpl implements IngredienteService{
 
 	@Autowired

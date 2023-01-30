@@ -3,11 +3,12 @@ package com.example.demo.servicio.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.example.demo.modelo.Bocadillo;
 import com.example.demo.persistencia.BocadillosRepository;
 import com.example.demo.servicio.interfaces.BocadilloService;
-
+@Service
 public class BocadilloServiceImpl implements BocadilloService{
 
 	@Autowired

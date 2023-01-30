@@ -21,23 +21,23 @@ import com.example.demo.persistencia.BocadilloDAO;
 import com.example.demo.persistencia.BocadillosRepository;
 import com.example.demo.persistencia.PedidoDAO;
 import com.example.demo.persistencia.PedidoRepository;
+import com.example.demo.servicio.impl.AlumnoServiceImpl;
+import com.example.demo.servicio.impl.BocadilloServiceImpl;
+import com.example.demo.servicio.impl.PedidoServiceImpl;
 
 @RequestMapping("/pedidos")
 @Controller
 public class PedidoController {
-	
-	PedidoDAO pedidoDAO = new PedidoDAO();
-	BocadilloDAO bocadilloDAO = new BocadilloDAO();
-	AlumnoDAO alumnoDAO = new AlumnoDAO();
+
 	
 	@Autowired
-	PedidoRepository pedidoRepo;
+	PedidoServiceImpl pedidoService;
 	
 	@Autowired
-	AlumnoRepository alumnoRepo;
+	AlumnoServiceImpl alumnoService;
 	
 	@Autowired
-	BocadillosRepository bocadilloRepo;
+	BocadilloServiceImpl bocadilloService;
 	
 	//controlador para listar los pedidos y pasar parametros
 	@GetMapping(value= {"", "/"})
@@ -45,11 +45,11 @@ public class PedidoController {
 		
 		//salir a buscar a la bd
 //		ArrayList<Pedido> misPedidos = pedidoDAO.listarPedidosJPA();
-		ArrayList<Pedido> misPedidos = (ArrayList<Pedido>) pedidoRepo.findAll();
+		ArrayList<Pedido> misPedidos = (ArrayList<Pedido>) pedidoService.listarPedidos();
 //		ArrayList<Alumno> misAlumnos = alumnoDAO.listarAlumnosJPA();
-		ArrayList<Alumno> misAlumnos = (ArrayList<Alumno>) alumnoRepo.findAll();
+		ArrayList<Alumno> misAlumnos = (ArrayList<Alumno>) alumnoService.listarAlumnos();
 //		ArrayList<Bocadillo> misBocadillos = bocadilloDAO.listarBocadillosJPA();
-		ArrayList<Bocadillo> misBocadillos = (ArrayList<Bocadillo>) bocadilloRepo.findAll();
+		ArrayList<Bocadillo> misBocadillos = (ArrayList<Bocadillo>) bocadilloService.listarBocadillos();
 		
 		
 		model.addAttribute("listaPedidos", misPedidos);
@@ -66,10 +66,10 @@ public class PedidoController {
 	@PostMapping("/edit/{id}")
 	public String editarPedido(@PathVariable Integer id, @ModelAttribute("pedidoaEditar") Pedido pedidoEditado, BindingResult bindingresult) {
 		
-		Alumno a = alumnoRepo.findById(pedidoEditado.getAlumno().getId()).get();
+		Alumno a = alumnoService.obtenerAlumnoPorId(pedidoEditado.getAlumno().getId());
 		pedidoEditado.setAlumno(a);
 		
-		Pedido pedidoaEditar = pedidoRepo.findById(id).get();
+		Pedido pedidoaEditar = pedidoService.obtenerPedidoPorId(id);
 		
 		for(Bocadillo b:pedidoaEditar.getBocadillos()) {
 			if(!pedidoEditado.getBocadillos().contains(b)) {
@@ -90,7 +90,7 @@ public class PedidoController {
 //		Pedido pedidoaEliminar = pedidoDAO.buscarPedidoPorIdJPA(id);
 //		pedidoDAO.deletePedidoJPA(pedidoaEliminar);
 		
-		pedidoRepo.deleteById(id);
+		pedidoService.eliminarPedidoPorId(id);
 		
 		return "redirect:/pedidos";
 	}
@@ -100,17 +100,17 @@ public class PedidoController {
 	public String addPedido(@ModelAttribute("pedidoNuevo") Pedido pedidoNew, BindingResult bindingresult) {
 
 		pedidoNew.calcularPrecio();
-		Alumno alumnoNuevo = alumnoDAO.buscarPorIdJPA(pedidoNew.getAlumno().getId()); //obtener alumno 
+		Alumno alumnoNuevo = alumnoService.obtenerAlumnoPorId(pedidoNew.getAlumno().getId()); //obtener alumno 
 		
 		alumnoNuevo.getPedidos().add(pedidoNew);
 		pedidoNew.setAlumno(alumnoNuevo);
 		
 
-		pedidoDAO.insertarPedidoJPA(pedidoNew);
+		pedidoService.insertarPedido(pedidoNew);
 		
 		for(Bocadillo b: pedidoNew.getBocadillos()) {
 			b.getPedidos().add(pedidoNew);
-			bocadilloDAO.modificarBocadilloJPA(b);
+			bocadilloService.insertarBocadillo(b);
 		}
 		
 		return "redirect:/pedidos";
@@ -120,7 +120,7 @@ public class PedidoController {
 	@GetMapping(value= {"/{id}"})
 	String idPedido(Model model, @PathVariable Integer id) {
 		
-		Pedido pedidoMostrar = pedidoRepo.findById(id).get();
+		Pedido pedidoMostrar = pedidoService.obtenerPedidoPorId(id);
 		model.addAttribute("pedidoMostrar", pedidoMostrar);
 		
 		return "pedido";

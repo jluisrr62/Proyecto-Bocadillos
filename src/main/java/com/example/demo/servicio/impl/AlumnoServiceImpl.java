@@ -3,13 +3,13 @@ package com.example.demo.servicio.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.stereotype.Service;
 
 import com.example.demo.modelo.Alumno;
 import com.example.demo.servicio.interfaces.AlumnoService;
 import com.example.demo.persistencia.AlumnoRepository;
-
-public class AlumnoServiceImp implements AlumnoService{
+@Service
+public class AlumnoServiceImpl implements AlumnoService{
 
 	@Autowired
 	public AlumnoRepository alumnoRepo;

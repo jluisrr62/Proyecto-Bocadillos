@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import java.util.ArrayList;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -13,19 +14,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.demo.modelo.Alumno;
 import com.example.demo.persistencia.AlumnoDAO;
+import com.example.demo.servicio.impl.AlumnoServiceImpl;
 
 @RequestMapping("/alumnos")
 @Controller
 public class AlumnoController {
 	
-	AlumnoDAO alumnoDAO = new AlumnoDAO();
+	@Autowired
+	public AlumnoServiceImpl alumnoService;
 	
 	//controlador para listar los alumnos y pasar parametros
 	@GetMapping(value= {"", "/"})
 	String homealumnos(Model model) {
 		
 		//salir a buscar a la bd
-		ArrayList<Alumno> misAlumnos = alumnoDAO.listarAlumnosJPA();
+		ArrayList<Alumno> misAlumnos = (ArrayList<Alumno>) alumnoService.listarAlumnos();
 		model.addAttribute("listaAlumnos", misAlumnos);
 		//le pasamos un nuevo alumno para poder editar un alumno
 		model.addAttribute("alumnoaEditar", new Alumno());
@@ -38,9 +41,9 @@ public class AlumnoController {
 	@PostMapping("/edit/{id}")
 	public String editarAlumno(@PathVariable Integer id, @ModelAttribute("alumnoaEditar") Alumno alumnoEditado, BindingResult bindingresult) {
 		
-		Alumno alumnoaEditar = alumnoDAO.buscarPorIdJPA(id);
+		Alumno alumnoaEditar = alumnoService.obtenerAlumnoPorId(id);
 		alumnoaEditar.setNombre(alumnoEditado.getNombre());
-		alumnoDAO.modificarAlumnoJPA(alumnoaEditar);
+		alumnoService.insertarAlumno(alumnoaEditar);
 		
 		
 		return "redirect:/alumnos";
@@ -50,8 +53,7 @@ public class AlumnoController {
 	@GetMapping("/delete/{id}")
 	public String eliminarAlumno(Model model, @PathVariable Integer id) {
 		
-		Alumno alumnoaEliminar = alumnoDAO.buscarPorIdJPA(id);
-		alumnoDAO.deleteAlumnoJPA(alumnoaEliminar);
+		alumnoService.eliminarAlumnoPorId(id);
 		
 		return "redirect:/alumnos";
 	}
@@ -60,7 +62,7 @@ public class AlumnoController {
 	@PostMapping("/add")
 	public String addAlumno(@ModelAttribute("alumnoNuevo") Alumno alumnoNew, BindingResult bindingresult) {
 
-		alumnoDAO.insertarAlumnoJPA(alumnoNew);
+		alumnoService.insertarAlumno(alumnoNew);
 		
 		return "redirect:/alumnos";
 	}
@@ -69,7 +71,7 @@ public class AlumnoController {
 	@GetMapping(value= {"/{id}"})
 	String idAlumno(Model model, @PathVariable Integer id) {
 		
-		Alumno alumnoMostrar = alumnoDAO.buscarPorIdJPA(id);
+		Alumno alumnoMostrar = alumnoService.obtenerAlumnoPorId(id);
 		model.addAttribute("alumnoMostrar", alumnoMostrar);
 		
 		return "alumno";
